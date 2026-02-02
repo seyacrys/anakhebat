@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandat Fashion</title>
+
+    <style>
+        * { box-sizing: border-box }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: url("https://img.pikbest.com/ai/illus_our/20230413/6ae0a62b019b4dab1dd066866b985365.jpg!w700wp") center/cover fixed;
+        }
+
+        .overlay {
+            min-height: 100vh;
+            background: rgba(0, 0, 0, .55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .box {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            padding: 28px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .25);
+            backdrop-filter: blur(14px);
+            animation: fadePage .6s ease;
+        }
+
+        .run-counter {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            font-size: 13px;
+            font-family: monospace;
+            color: #fff;
+            opacity: .85;
+        }
+
+        .hidden { display: none }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-top: -2%;
+        }
+
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s ease;
+        }
+
+        .btn { background: #111827; color: #fff }
+        .btn-outline { background: rgba(255, 255, 255, .6) }
+
+        button:hover { transform: translateY(-2px) }
+
+        .menu-btn {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .45);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 14px;
+            text-align: center;
+            animation: fadeUp .5s ease;
+            transition: .35s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .struk {
+            background: rgba(255, 255, 255, .6);
+            border-radius: 16px;
+            padding: 18px;
+            font-family: monospace;
+            animation: fadeUp .5s ease;
+        }
+
+        .total {
+            margin-top: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .pay-method {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .pay-method button {
+            background: rgba(255, 255, 255, .5);
+        }
+
+        .pay-method button.active {
+            background: #111827;
+            color: #fff;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+
+        @keyframes fadePage {
+            from { opacity: 0; transform: scale(.97) }
+            to { opacity: 1; transform: scale(1) }
+        }
+    </style>
+</head>
+
+<body>
+<div class="overlay">
+<div class="box">
+
+    <div class="run-counter" id="runCounter">run: 1</div>
+
+    <div id="menu">
+        <h2>Selamat Datang di<br>Sandat Fashion</h2>
+        <div class="menu-btn">
+            <button class="btn" onclick="setMember(true)">Member</button>
+            <button class="btn-outline" onclick="setMember(false)">Non Member</button>
+        </div>
+    </div>
+
+    <div id="shop" class="hidden">
+        <h2>Daftar Produk</h2>
+        <div class="grid">
+            <div class="card"><img src="https://image2url.com/r2/default/images/1769669417500-c944f44e-2817-45a6-85af-090c602d0167.jpeg"><b>Baju</b><br>Rp50.000<input type="number" id="baju" value="0" min="0"></div>
+            <div class="card"><img src="https://image2url.com/r2/default/images/1769669666888-8cca1f88-2249-4997-885d-0f82b3c673ab.jpeg"><b>Celana</b><br>Rp100.000<input type="number" id="celana" value="0" min="0"></div>
+            <div class="card"><img src="https://image2url.com/r2/default/images/1769669481934-4dc6162e-6b68-46d4-869d-30f63b4fe32f.jpeg"><b>Sepatu</b><br>Rp200.000<input type="number" id="sepatu" value="0" min="0"></div>
+            <div class="card"><img src="https://image2url.com/r2/default/images/1769669565477-fab1eb45-e991-423f-be33-2810d8172207.jpeg"><b>Kaos Kaki</b><br>Rp15.000<input type="number" id="kaoskaki" value="0" min="0"></div>
+            <div class="card"><img src="https://image2url.com/r2/default/images/1769670303150-e22f8aa6-ee33-4f37-be56-38cd434fb20c.jpeg"><b>Topi</b><br>Rp20.000<input type="number" id="topi" value="0" min="0"></div>
+        </div>
+        <br>
+        <button class="btn" onclick="proses()">Lanjut Bayar</button>
+        <p id="msg" style="color:#fecaca;text-align:center"></p>
+    </div>
+
+    <div id="pay" class="hidden">
+        <h2>Pembayaran</h2>
+        <div id="detail" class="struk"></div>
+        <div class="total" id="totalText"></div>
+
+        <div class="pay-method">
+            <button onclick="setPay(this)">Cash</button>
+            <button onclick="setPay(this)">QRIS</button>
+            <button onclick="setPay(this)">E-Wallet</button>
+            <button onclick="setPay(this)">Debit</button>
+        </div>
+
+        <div id="qrisBox" class="hidden" style="text-align:center;margin:15px 0">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=QRIS-SANDAT-FASHION"
+                 style="border-radius:12px">
+            <p style="color:#fff;font-size:14px;margin-top:6px">
+                Scan QRIS Sandat Fashion
+            </p>
+        </div>
+
+        <!-- INPUT NOMOR DEBIT -->
+        <input id="debitNo" class="hidden" placeholder="Masukkan Nomor Kartu Debit">
+
+        <input id="uang" placeholder="Masukkan uang (Cash)">
+        <br><br>
+        <button class="btn" onclick="bayar()">Bayar</button>
+    </div>
+
+    <div id="result" class="hidden">
+        <h2>Struk Pembayaran</h2>
+        <div id="strukFinal" class="struk"></div>
+        <br>
+        <button class="btn" onclick="location.reload()">Transaksi Baru</button>
+    </div>
+
+</div>
+</div>
+
+<script>
+let run = localStorage.getItem("sandat_run") || 0;
+run++;
+localStorage.setItem("sandat_run", run);
+runCounter.innerText = "run: " + run;
+
+const harga = {
+    baju: 50000,
+    celana: 100000,
+    sepatu: 200000,
+    kaoskaki: 15000,
+    topi: 20000
+};
+
+let isMember = false, totalAkhir = 0, ringkasan = "", metode = "Cash";
+const rp = n => "Rp " + n.toLocaleString("id-ID");
+
+function setMember(v) {
+    isMember = v;
+    menu.classList.add("hidden");
+    shop.classList.remove("hidden");
+}
+
+function proses() {
+    let q = {
+        baju:+baju.value, celana:+celana.value, sepatu:+sepatu.value,
+        kaoskaki:+kaoskaki.value, topi:+topi.value
+    };
+
+    if (Object.values(q).every(v => v === 0)) {
+        msg.innerText = "Pilih minimal 1 produk!";
+        return;
+    }
+
+    let subtotal = 0;
+    ringkasan = "";
+
+    function hitung(n,d){
+        let t = q[n] * harga[n];
+        if(d) t -= t*d;
+        if(q[n]) ringkasan += `${n} x${q[n]} : ${rp(t)}<br>`;
+        subtotal += t;
+    }
+
+    hitung("baju", q.baju>=5?0.15:0);
+    hitung("celana", q.celana>=4?0.10:0);
+    hitung("kaoskaki", q.kaoskaki>=7?0.25:0);
+    hitung("sepatu", q.sepatu>=3?0.20:0);
+    hitung("topi",0);
+
+    if(isMember) subtotal -= subtotal*0.10;
+
+    let diskonTambahan = subtotal>=1000000?subtotal*0.25:
+                         subtotal>=500000?subtotal*0.20:0;
+
+    totalAkhir = subtotal - diskonTambahan;
+
+    ringkasan += `<hr>Subtotal: ${rp(subtotal)}<br>Diskon Tambahan: ${rp(diskonTambahan)}`;
+    detail.innerHTML = ringkasan;
+    totalText.innerText = "Total Bayar: " + rp(totalAkhir);
+
+    shop.classList.add("hidden");
+    pay.classList.remove("hidden");
+}
+
+function setPay(el){
+    document.querySelectorAll(".pay-method button").forEach(b=>b.classList.remove("active"));
+    el.classList.add("active");
+    metode = el.innerText;
+
+    uang.style.display = metode==="Cash"?"block":"none";
+    qrisBox.classList.toggle("hidden", metode!=="QRIS");
+    debitNo.classList.toggle("hidden", metode!=="Debit");
+}
+
+uang.addEventListener("input",()=>{
+    let n = uang.value.replace(/\D/g,"");
+    uang.value = n?rp(parseInt(n)):"";
+});
+
+function bayar(){
+    if(metode==="Cash"){
+        let u = parseInt(uang.value.replace(/\D/g,""))||0;
+        if(u<totalAkhir) return;
+        strukFinal.innerHTML = ringkasan+
+        `<hr>Metode: Cash<br>Bayar: ${rp(u)}<br>Kembali: ${rp(u-totalAkhir)}`;
+    } else {
+        strukFinal.innerHTML = ringkasan+
+        `<hr>Metode: ${metode}<br>Status: LUNAS`;
+    }
+    pay.classList.add("hidden");
+    result.classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
